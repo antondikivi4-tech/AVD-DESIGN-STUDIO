@@ -3,199 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVD DESIGN STUDIO | Премиум сайты для бизнеса</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>AVD Design Studio</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Фоны: янтарный свет, лофт-стена и холст для искр -->
-    <div class="wood-glow"></div>
-    <div class="loft-brick-bg"></div>
-    <canvas id="sparks-canvas"></canvas>
-
     <!-- Шапка сайта -->
-    <header class="navbar">
-        <div class="logo">AVD <span>DESIGN STUDIO</span></div>
-        <nav class="nav-links">
-            <a href="#services">Услуги</a>
-            <a href="#pricing">Цены</a>
-            <a href="#contact">Контакты</a>
-        </nav>
-        <a href="#contact" class="btn-nav">Связаться</a>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="logo.jpg" alt="AVD Design Studio Logo">
+            </a>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#contact" class="btn-nav">Обсудить проект</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- 1. Главный экран -->
-    <section class="hero">
-        <div class="hero-container">
-            <h1 class="hero-title">
-                Создаем цифровые пространства <br>
-                <span class="serif-italic">для успешного бизнеса</span>
-            </h1>
-            <p class="hero-subtitle">
-                Дизайн-студия полного цикла. Превращаем пиксели в дорогой интерактивный опыт для амбициозных брендов.
-            </p>
-            <div class="hero-actions">
-                <a href="#contact" class="btn-primary">Начать проект</a>
-            </div>
-
-            <!-- Узкая строка доверия -->
-            <div class="hero-trust-bar">
-                <div class="trust-item">
-                    <span class="trust-icon">✦</span>
-                    <span class="trust-text">Awwwards UX/UI Level</span>
-                </div>
-                <div class="trust-divider"></div>
-                <div class="trust-item">
-                    <span class="trust-icon">✦</span>
-                    <span class="trust-text">Соблюдение NDA и сроков</span>
-                </div>
-                <div class="trust-divider"></div>
-                <div class="trust-item">
-                    <span class="trust-icon">✦</span>
-                    <span class="trust-text">Поддержка 24/7 после сдачи</span>
-                </div>
-            </div>
-
-            <!-- Логотип -->
-            <div class="hero-brand-logo-wrapper">
-                <img src="logo.jpg" alt="AVD Design Studio Logo" class="hero-brand-logo">
-            </div>
+    <!-- Главная секция -->
+    <section class="hero" style="background-image: url('bg.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>AVD Design Studio</h1>
+            <p>Создаем современный дизайн и эффективные решения для вашего бизнеса.</p>
+            <a href="#contact" class="btn-primary">Обсудить проект</a>
         </div>
     </section>
 
-    <!-- 2. Блок услуг -->
-    <section class="services" id="services">
-        <div class="services-header-wrapper">
-            <div class="services-header">
-                <h2 class="services-title">Наши <span class="serif-italic">компетенции</span></h2>
-                <p class="services-subtitle">Разрабатываем цифровые продукты, которые выносят ваш бизнес на премиальный уровень.</p>
-            </div>
-
-            <div class="services-stats-card">
-                <div class="stat-item">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">довольных клиентов</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">лет на рынке</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="tech-stack">
-                    <span class="tech-tag">WebGL</span>
-                    <span class="tech-tag">Three.js</span>
-                    <span class="tech-tag">UI/UX</span>
-                    <span class="tech-tag">React</span>
-                </div>
-            </div>
+    <!-- О нас -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>О студии</h2>
+            <p>Мы — команда профессионалов, вдохновленная созданием уникального визуального стиля. Наша цель — превратить ваши идеи в продуманный и эстетичный продукт.</p>
         </div>
+    </section>
 
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="card-wood-line"></div>
-                <div class="card-content">
-                    <span class="card-number">01</span>
-                    <h3>Premium Web / Промо-сайты</h3>
-                    <p>Эксклюзивный дизайн, интерактивный 3D-опыт и анимация кинематографического уровня для вау-эффекта.</p>
+    <!-- Услуги -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Веб-дизайн</h3>
+                    <p>Проработка пользовательских интерфейсов (UI/UX) для сайтов и приложений любой сложности.</p>
                 </div>
-            </div>
-
-            <div class="service-card">
-                <div class="card-wood-line"></div>
-                <div class="card-content">
-                    <span class="card-number">02</span>
-                    <h3>Корпоративные порталы</h3>
-                    <p>Сложная и продуманная архитектура, высокая скорость загрузки и интеграция с внутренними CRM-системами.</p>
+                <div class="service-card">
+                    <h3>Брендинг</h3>
+                    <p>Разработка айдентики, логотипов и полного фирменного стиля вашей компании.</p>
                 </div>
-            </div>
-
-            <div class="service-card">
-                <div class="card-wood-line"></div>
-                <div class="card-content">
-                    <span class="card-number">03</span>
-                    <h3>E-commerce экосистемы</h3>
-                    <p>Проектирование интернет-магазинов с бесшовным путем клиента до покупки и акцентом на высокую конверсию.</p>
+                <div class="service-card">
+                    <h3>3D Визуализация</h3>
+                    <p>Создание объёмных графических решений и качественной 3D-графики.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. Блок Цен -->
-    <section class="pricing" id="pricing">
-        <div class="pricing-header">
-            <h2 class="pricing-title">Стоимость <span class="serif-italic">решений</span></h2>
-            <p class="pricing-subtitle">Прозрачное ценообразование для проектов любого масштаба. Без скрытых платежей.</p>
-        </div>
-
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="price-level">Business</div>
-                <div class="price-value">от 150 000 ₽</div>
-                <ul class="price-features">
-                    <li>Индивидуальный дизайн</li>
-                    <li>До 7 уникальных страниц</li>
-                    <li>Интеграция с CRM-системой</li>
-                    <li>Базовая SEO-подготовка</li>
-                </ul>
-                <a href="#contact" class="btn-price">Обсудить тариф</a>
-            </div>
-
-            <div class="price-card featured">
-                <div class="wood-badge">Популярно</div>
-                <div class="price-level">Premium Exclusive</div>
-                <div class="price-value">от 350 000 ₽</div>
-                <ul class="price-features">
-                    <li>Дизайн уровня Awwwards</li>
-                    <li>Сложная 3D & WebGL анимация</li>
-                    <li>Проработка пути клиента (UX)</li>
-                    <li>Поддержка 3 месяца после запуска</li>
-                </ul>
-                <a href="#contact" class="btn-price btn-featured">Заказать проект</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Блок Контактов / Обсудить проект -->
-    <section class="contact" id="contact">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Обсудить <br><span class="serif-italic">ваш проект</span></h2>
-                <p>Заполните форму или напишите нам напрямую в Telegram. Мы ответим в течение пары часов и подготовим коммерческое предложение.</p>
-                
-                <!-- Прямая кнопка перенаправления в Telegram -->
-                <div class="contact-direct">
-                    <a href="https://t.me/AVDDESINGSTUDIO" target="_blank" rel="noopener noreferrer" class="contact-telegram-btn">
-                        <svg class="tg-icon" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.37-.49 1.02-.75 3.99-1.74 6.66-2.89 8.02-3.45 3.81-1.58 4.6-1.86 5.12-1.87.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.13-.03.22z"/>
-                        </svg>
-                        <span>Написать в Telegram: <b>@AVDDESINGSTUDIO</b></span>
-                    </a>
-                </div>
-
-                <div class="contact-email">hello@avd-designstudio.com</div>
-            </div>
+    <!-- Секция контакта / Обсуждение -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Обсудить проект</h2>
+            <p>Готовы воплотить вашу идею в жизнь? Напишите нам, и мы свяжемся с вами в ближайшее время!</p>
             
-            <!-- Форма отправки в Telegram бот -->
-            <div class="contact-form-block">
-                <form class="project-form" id="telegram-form">
-                    <div class="form-group">
-                        <input type="text" id="user-name" required placeholder="Ваше имя">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="user-contact" required placeholder="Email или Telegram">
-                    </div>
-                    <div class="form-group">
-                        <textarea id="user-message" placeholder="Расскажите немного о вашем проекте" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit" id="btn-submit">Отправить заявку</button>
-                </form>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <span>Email:</span>
+                    <a href="mailto:avddesingstudio@mail.ru">avddesingstudio@mail.ru</a>
+                </div>
             </div>
+
+            <!-- Форма обратной связи -->
+            <form class="contact-form" action="https://formspree.io/f/avddesingstudio@mail.ru" method="POST">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="email" name="email" placeholder="Ваш Email" required>
+                <textarea name="message" rows="5" placeholder="Расскажите о вашем проекте..." required></textarea>
+                <button type="submit" class="btn-primary">Отправить заявку</button>
+            </form>
         </div>
     </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 AVD Design Studio. Все права защищены.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
