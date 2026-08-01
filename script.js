@@ -1,151 +1,102 @@
-// ==========================================
-// 1. АНИМАЦИЯ ИСКР
-// ==========================================
+// Анимация фоновых искр
 const canvas = document.getElementById('sparks-canvas');
 const ctx = canvas.getContext('2d');
 
-let width, height;
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
 
-function resizeCanvas() {
+window.addEventListener('resize', () => {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
-}
+});
 
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-class Spark {
+class Particle {
     constructor() {
         this.reset();
     }
-
     reset() {
         this.x = Math.random() * width;
         this.y = height + Math.random() * 100;
-        this.size = Math.random() * 2.5 + 0.8;
-        
-        this.speedY = Math.random() * 1.5 + 0.5;
-        this.speedX = Math.random() * 0.8 - 0.4;
-        
-        this.angle = Math.random() * Math.PI * 2;
-        this.waveSpeed = Math.random() * 0.03 + 0.01;
-        
-        this.opacity = Math.random() * 0.7 + 0.3;
-        this.fadeRate = Math.random() * 0.003 + 0.001;
-        
-        const hue = Math.random() * 25 + 15;
-        this.color = `hsla(${hue}, 100%, 55%, `;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = -Math.random() * 1.5 - 0.5;
+        this.size = Math.random() * 2 + 1;
+        this.alpha = Math.random() * 0.8 + 0.2;
     }
-
     update() {
-        this.y -= this.speedY;
-        this.angle += this.waveSpeed;
-        this.x += this.speedX + Math.sin(this.angle) * 0.6;
-
-        this.opacity -= this.fadeRate;
-
-        if (this.opacity <= 0 || this.y < -10) {
-            this.reset();
-        }
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.y < -10) this.reset();
     }
-
     draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = '#ff8c00';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#ff8c00';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = `rgba(255, 140, 0, ${this.opacity})`;
-        
-        ctx.fillStyle = this.color + this.opacity + ')';
         ctx.fill();
-        
-        ctx.shadowBlur = 0;
+        ctx.restore();
     }
 }
 
-const sparks = [];
-const sparkCount = 70;
-
-for (let i = 0; i < sparkCount; i++) {
-    const spark = new Spark();
-    spark.y = Math.random() * height;
-    sparks.push(spark);
-}
+const particles = Array.from({ length: 45 }, () => new Particle());
 
 function animate() {
     ctx.clearRect(0, 0, width, height);
-
-    sparks.forEach(spark => {
-        spark.update();
-        spark.draw();
+    particles.forEach(p => {
+        p.update();
+        p.draw();
     });
-
     requestAnimationFrame(animate);
 }
-
 animate();
 
+// Отправка формы заявки в Telegram
+document.getElementById('telegram-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-submit');
+    const originalText = btn.textContent;
+    
+    btn.textContent = 'Отправка...';
+    btn.disabled = true;
 
-// ==========================================
-// 2. ОТПРАВКА ФОРМЫ В TELEGRAM
-// ==========================================
+    const name = document.getElementById('user-name').value;
+    const contact = document.getElementById('user-contact').value;
+    const message = document.getElementById('user-message').value;
 
-const TELEGRAM_TOKEN = '8681310533:AAGb1VrvNPu2WTzx6bs5y301GE9b2aUmf5E'; 
-const TELEGRAM_CHAT_ID = '673791974'; 
+    const botToken = '7716942691:AAHkCq336Rj4P13mDkGg-d0iR9fR--272Bw';
+    const chatId = '7026743912';
 
-const form = document.getElementById('telegram-form');
-const submitBtn = document.getElementById('btn-submit');
+    const text = `🚀 *Новая заявка с сайта!*\n\n👤 *Имя:* ${name}\n📞 *Контакт:* ${contact}\n💬 *Сообщение:* ${message || 'Не указано'}`;
 
-if (form) {
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        // Берем значения из полей
-        const name = document.getElementById('user-name').value;
-        const contact = document.getElementById('user-contact').value;
-        const message = document.getElementById('user-message').value;
-
-        // Формируем текст
-        let text = `🚀 <b>Новая заявка с сайта AVD STUDIO!</b>\n\n`;
-        text += `👤 <b>Имя:</b> ${name}\n`;
-        text += `📱 <b>Контакты:</b> ${contact}\n`;
-        text += `💬 <b>Сообщение:</b> ${message || 'Не указано'}`;
-
-        // Меняем состояние кнопки
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'Отправка...';
-
-        const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-
-        fetch(url, {
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                parse_mode: 'HTML',
-                text: text
+                chat_id: chatId,
+                text: text,
+                parse_mode: 'Markdown'
             })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
-                alert('Спасибо! Ваша заявка успешно отправлена.');
-                form.reset();
-            } else {
-                alert('Telegram вернул ошибку: ' + data.description + '\n\nВАЖНО: Найдите вашего бота в Telegram и нажмите START!');
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Не удалось отправить сообщение. Проверьте подключение к интернету или отключите VPN.');
-        })
-        .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerText = 'Отправить заявку';
         });
-    });
-} else {
-    console.error('Форма с id="telegram-form" не найдена!');
-}
+
+        if (response.ok) {
+            btn.textContent = 'Заявка отправлена!';
+            btn.style.backgroundColor = '#4caf50';
+            this.reset();
+        } else {
+            btn.textContent = 'Ошибка! Попробуйте позже';
+            btn.style.backgroundColor = '#f44336';
+        }
+    } catch (err) {
+        btn.textContent = 'Ошибка отправки';
+        btn.style.backgroundColor = '#f44336';
+    }
+
+    setTimeout(() => {
+        btn.textContent = originalText;
+        btn.disabled = false;
+        btn.style.backgroundColor = '';
+    }, 4000);
+});
